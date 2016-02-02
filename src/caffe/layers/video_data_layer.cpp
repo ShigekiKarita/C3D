@@ -120,11 +120,11 @@ void* VideoDataLayerPrefetch(void* layer_pointer) {
     }
 
     if (layer->phase_ == Caffe::TEST){
-    	CHECK(read_status) << "Testing must not miss any example";
+    	CHECK(read_status) << "Testing must not miss any example" << "; cannot read " << layer->file_list_[id];
     }
 
     if (!read_status) {
-    	//LOG(ERROR) << "cannot read " << layer->file_list_[id];
+    	LOG(ERROR) << "cannot read " << layer->file_list_[id];
         layer->lines_id_++;
         if (layer->lines_id_ >= chunks_size) {
           // We have reached the end. Restart from the first.
